@@ -20,6 +20,44 @@ Let assume $\mathscr{P}$ represents the coordinates of a protein PDB structure. 
 \end{eqnarray*}
  It must be noted that dynamical snapshots only changes the coordinates as function of time. A complete trajectory comprises of many such snapshots ordered in arbitrary time scale, $t \in \lbrace 1, 2, \dots K \rbrace$.
  \par
- Normal mode analysis yields, a series of trajectory orthogonal to each other. The trajectory orthogonality guarantees, if we take signed difference of displacement between two trajectory and integrate over time it is $0$. The time is in arbitrary scale. Each of this trajectory represents one vibrating mode of the molecule. Let represent $\mathbf{\mathscr{P}}_{m}$ is the coordinate trajectory corresponding to the mode $m$.
+ Normal mode analysis yields, a series of trajectory orthogonal to each other. The trajectory orthogonality guarantees, if we take signed difference of displacement between two trajectory and integrate over time it is $0$. The time is in arbitrary scale. Each of this trajectory represents one vibrating mode of the molecule. Let represent $\mathbf{\mathscr{P}}_{m}$ is the coordinate trajectory corresponding to the mode $m$. 
+\begin{equation*}
+    \mathscr{P}_{m} = \Big\lbrace \mathscr{P}^{1}_{m}, \mathscr{P}^{2}_{m}, \dots ,\mathscr{P}^{t}_{m}, \dots , \mathscr{P}^{K}_{m} \Big\rbrace
+\end{equation*}
+ Let $\Psi$ is the function that generates normal mode trajectories for a given PDB coordinates $\mathscr{P}$.
+ \begin{equation*}
+     \Psi(\mathscr{P}) = \Big\lbrace \mathscr{P}_{1} , \mathscr{P}_{2}, \dots , \mathscr{P}_{m}, \dots ,\mathscr{P}_{M} \Big\rbrace
+ \end{equation*}
+ 
+\subsection{Fluctuation measure, $\zeta(m \vert \mathscr{P}, \Psi, p)$}
+Normal model analysis assumes the starting PDB structure $\mathscr{P}$, is in equilibrium. For any given mode $m$ of a protein structure $\mathscr{P}$, the mean position is the base PDB coordinates, typically presented as the first time point snapshot in the trajectory. Therefore for any two pair of residue in the PDB structure $q_i$, and $q_j$ the equilibrium distance is given as 
+\begin{equation*}
+    \mathbf{d}^{0}_{i,j}(\mathscr{P}) = \sqrt{ (x_i - x_j)^2 + (y_i-y_j)^2 + (z_i-z_j)^2 }
+\end{equation*}
+Similarly, the distance between $q_i$, and $q_j$ in any time snapshot $t$ in mode $m$, can be defined as,
+\begin{equation*}
+    \mathbf{d}^{t.m}_{i,j}(\mathscr{P}) = \sqrt{ (x^{t}_{i,m} - x^{t}_{j,m})^2 + (y^{t}_{i,m} - y^{t}_{j,m})^2 + (z^{t}_{i,m} - z^{t}_{j,m})^2}
+\end{equation*}
+Therefore the fluctuation of a residue pair in mode $m$ can be described as 
+\begin{equation*}
+    \Sigma^{m}_{i,j}(\mathscr{P}) = \sqrt{ \dfrac{1}{K} \sum^{K}_{t=1} (\mathbf{d}^{t,m}_{i,j}(\mathscr{P}) - \mathbf{d}^{0}_{i,j}(\mathscr{P}))^2 }
+\end{equation*}
+ Thus for each mode and every pair of residues we can evaluate the fluctuation measure. Each residue pair are then ordered in descending order of the fluctuation measure. Therefore the first pair in the list is the residue pair that captures the maximum fluctuation captured by the mode. Similarly, the subsequent order pair. Top few pairs uniquely captures the fluctuation as described by the vibration mode. Thus we define a parametric set definition for structural fluctuation captured by a specific mode.
+ \begin{eqnarray*}
+     \zeta(m \vert \mathscr{P}, \Psi, p) & = & \Big\lbrace (i, j) : \sigma_{i,j} \in \text{sort}(\Sigma^{m}_{i,j}(\mathscr{P})[1 \dots \lfloor p*\binom{N}{2}\rfloor ] )\Big\rbrace 
+ \end{eqnarray*}
+ \begin{eqnarray*}
+     \forall\; i \in \lbrace 1 \dots N \rbrace & j \in \lbrace 1 \dots N \rbrace & i < j   \\
+ \end{eqnarray*}
+ $p$ can take value between (0,1). As value approaches $1$ the fluctuation set definition for every mode becomes same.
+ \par
+ Let describes a distance measure between two modes $m_i$, and $m_j$ in terms of the fluctuation set measure
+ \begin{equation*}
+     \mathbf{d}_{\ast}{\zeta(m_i \vert p), \zeta(m_j \vert p)} = \dfrac{\zeta(m_i\vert p) \Delta \zeta(m_j\vert p)}{\zeta(m_i\vert p) \cup \zeta(m_j\vert p)}
+ \end{equation*}
+ As the distance measure finally approaches $0$, with increasing $p$. 
+ 
+\subsection{Functional site}
+Functional site in a protein is a patch in the 3D structure, that is directly involved with a biological activity. An biological site can be defined as collection of spatially collocated residues. 
 
 \end{document}
