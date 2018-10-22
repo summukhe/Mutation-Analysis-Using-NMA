@@ -1,0 +1,25 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\title{Mutation Analysis Using Normal Mode Analysis }
+\author{{Sumanta Mukherjee} \and {Sunaina Banerjee}}
+\date{October 2018}
+
+\begin{document}
+
+\maketitle
+
+\section{Terms \& definitions }
+\subsection{Basics}
+Let assume $\mathscr{P}$ represents the coordinates of a protein PDB structure. $\mathscr{P}$ is an ordered set of tuples $(q, r, x, y, z)$, where $q$ represents unique identifier for a residue, $r$ is the type associated with the residue, $x$, $y$, and $z$ represents its X, Y, and Z coordinate respectively. Let $\mathscr{P}^{t}$ represents snapshot coordinate of a protein dynamics, at some arbitrary time point $t$. 
+\begin{eqnarray*}
+  \mathscr{P}^{t} & = & \Big\lbrace (q_{1},r_{1},x^{t}_{1},y^{t}_{1},z^{t}_{1}), (q_{2},r_{2},x^{t}_{2},y^{t}_{2},z^{t}_{2}) \dots (q_{N},r_{N},x^{t}_{N},y^{t}_{N},z^{t}_{N}) \Big\rbrace
+\end{eqnarray*}
+ It must be noted that dynamical snapshots only changes the coordinates as function of time. A complete trajectory comprises of many such snapshots ordered in arbitrary time scale, $t \in \lbrace 1, 2, \dots K \rbrace$.
+ \par
+ Normal mode analysis yields, a series of trajectory orthogonal to each other. The trajectory orthogonality guarantees, if we take signed difference of displacement between two trajectory and integrate over time it is $0$. The time is in arbitrary scale. Each of this trajectory represents one vibrating mode of the molecule. Let represent $\mathbf{\mathscr{P}}_{m}$ is the coordinate trajectory corresponding to the mode $m$.
+
+\end{document}
